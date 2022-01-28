@@ -8,6 +8,10 @@ class Variant(TimeStampMixin):
     description = models.TextField()
     active = models.BooleanField(default=True)
 
+    def get_unique_values(self):
+        print()
+        return self.productvariant_set.values('variant_title').distinct()
+
 
 class Product(TimeStampMixin):
     title = models.CharField(max_length=255)
