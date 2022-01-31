@@ -32,7 +32,7 @@ class ProductVariantSerializer(serializers.ModelSerializer):
 
 class VariantsSerializer(serializers.Serializer):
     option = serializers.CharField()
-    tag = serializers.ListField(
+    tags = serializers.ListField(
         child=serializers.CharField()
     )
 
@@ -111,7 +111,7 @@ class ProductSerializer(serializers.ModelSerializer):
             )
         for variant in variants:
             v_id = Variant.objects.get(id=variant['option'])
-            for tag in variant['tag']:
+            for tag in variant['tags']:
                 ProductVariant.objects.create(
                     product=product,
                     variant=v_id,
