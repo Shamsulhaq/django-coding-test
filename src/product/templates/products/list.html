@@ -63,27 +63,27 @@
                     {% for p in object_list %}
                         <tr>
                             <td>{{ forloop.counter }}</td>
-                            <td>{{ p.title }}<br> Created at : {{ p.created_at }}</td>
+                            <td>{{ p.title }}<br> Created at : {{ p.created_at|timesince }} ago</td>
                             <td>{{ p.description }}</td>
                             <td>
                                 <dl class="row mb-0" style="height: 80px; overflow: hidden" id="{{p.id}}">
 
+                                {% for vp in p.productvariantprice_set.all %}
                                     <dt class="col-sm-3 pb-0">
-                                        {% for vn in p.productvariant_set.all %}
-                                            {{ vn.variant_title }}/
-                                        {% endfor %}
+                                        {{ vp.product_variant_one.variant_title }}/{{ vp.product_variant_two.variant_title }}/{{ vp.product_variant_three.variant_title }}
                                     </dt>
                                     <dd class="col-sm-9">
                                         <dl class="row mb-0">
-                                            <dt class="col-sm-4 pb-0">Price : {% for vp in p.productvariantprice_set.all %}
+                                            <dt class="col-sm-4 pb-0">Price :
                                                 {{ vp.price }}
-                                            {% endfor %}</dt>
-                                            <dd class="col-sm-8 pb-0">InStock : {% for vp in p.productvariantprice_set.all %}
+                                            </dt>
+                                            <dd class="col-sm-8 pb-0">InStock :
                                                 {{ vp.stock|floatformat }}
-                                            {% endfor %}</dd>
+                                            </dd>
                                         </dl>
                                     </dd>
                                     </dd>
+                                    {% endfor %}
                                 </dl>
                                 <button onclick="$('#{{p.id}}').toggleClass('h-auto')" class="btn btn-sm btn-link">Show
                                     more

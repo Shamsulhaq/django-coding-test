@@ -107,7 +107,7 @@ class ProductSerializer(serializers.ModelSerializer):
         for image in images:
             ProductImage.objects.create(
                 product=product,
-                file_path=images
+                file_path=image
             )
         for variant in variants:
             v_id = Variant.objects.get(id=variant['option'])
